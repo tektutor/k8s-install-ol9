@@ -35,4 +35,8 @@ cd ~
 git clone https://github.com/kubernetes-sigs/kubespray.git
 ```
 
-## Let's create 
+## Let's create a VM using KVM
+```
+virt-install --name master-1 --memory 131072 --vcpus 8 \
+--disk size=500 --location noble-server-clouding-amd64.img --os-variant ubuntu24.04
+```
