@@ -27,3 +27,12 @@ sudo systemctl list-units --type=socket virt*
 ```
 wget https://cloud-images.ubuntu.com/daily/server/noble/current/noble-server-cloudimg-amd64.img
 ```
+
+## Clone kubespray
+```
+su -
+cd ~
+git clone https://github.com/kubernetes-sigs/kubespray.git
+```
+
+## Let's create 
