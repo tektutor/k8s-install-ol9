@@ -37,18 +37,20 @@ git clone https://github.com/kubernetes-sigs/kubespray.git
 
 ## Let's create a VM using KVM
 ```
-virt-install --name master-1 --memory 131072 --vcpus 8 \
---disk size=500 --location noble-server-clouding-amd64.img --os-variant ubuntu24.04
+sudo virt-builder ubuntu-20.04  --format qcow2 \
+  --size 500G -o /var/lib/libvirt/images/master-1.qcow2 \
+  --root-password password:rps@123
 
-virt-install \
---name master-1 \
---ram 131072 \
---disk path=/var/lib/libvirt/images/noble-server-clouding-amd64.img,size=500 \
---vcpus 8 \
---os-variant ubuntu24.04 \
---network bridge=br0 \
---graphics none \
---console pty,target_type=serial \
---location /root/Downloads/ubuntu-24.04-live-server-amd64.iso,kernel=casper/vmlinuz,initrd=casper/initrd \
---extra-args 'console=ttyS0,115200n8'
+sudo virt-install \
+  --name ocp-bastion-server \
+  --ram 131072 \
+  --vcpus 8 \
+  --disk path=/var/lib/libvirt/images/master-1.qcow2 \
+  --os-variant ubuntu20.04 \
+  --network bridge=default \
+  --graphics none \
+  --serial pty \
+  --console pty \
+  --boot hd \
+  --import
 ```
