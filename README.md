@@ -43,12 +43,12 @@ virt-install --name master-1 --memory 131072 --vcpus 8 \
 virt-install \
 --name master-1 \
 --ram 131072 \
---disk path=/var/kvm/images/ubuntu2404.img,size=20 \
+--disk path=/var/lib/libvirt/images/noble-server-clouding-amd64.img,size=500 \
 --vcpus 8 \
 --os-variant ubuntu24.04 \
 --network bridge=br0 \
 --graphics none \
 --console pty,target_type=serial \
 --location /root/Downloads/ubuntu-24.04-live-server-amd64.iso,kernel=casper/vmlinuz,initrd=casper/initrd \
---extra-args 'console=ttyS0,115200n8
+--extra-args 'console=ttyS0,115200n8'
 ```
