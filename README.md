@@ -39,4 +39,16 @@ git clone https://github.com/kubernetes-sigs/kubespray.git
 ```
 virt-install --name master-1 --memory 131072 --vcpus 8 \
 --disk size=500 --location noble-server-clouding-amd64.img --os-variant ubuntu24.04
+
+virt-install \
+--name master-1 \
+--ram 131072 \
+--disk path=/var/kvm/images/ubuntu2404.img,size=20 \
+--vcpus 8 \
+--os-variant ubuntu24.04 \
+--network bridge=br0 \
+--graphics none \
+--console pty,target_type=serial \
+--location /root/Downloads/ubuntu-24.04-live-server-amd64.iso,kernel=casper/vmlinuz,initrd=casper/initrd \
+--extra-args 'console=ttyS0,115200n8
 ```
