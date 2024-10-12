@@ -140,6 +140,147 @@ sudo dnf -y install git vim wget curl bash-completion tree tar libselinux-python
 sudo reboot
 ```
 
+Master-3 VM
+```
+sudo virt-builder fedora-39  --format qcow2 \
+  --size 500G -o /var/lib/libvirt/images/master-3.qcow2 \
+  --root-password password:Root@123
+
+sudo virt-install \
+  --name master-3 \
+  --ram 131072 \
+  --vcpus 8 \
+  --disk path=/var/lib/libvirt/images/master-3.qcow2 \
+  --os-variant rhel8.0 \
+  --network bridge=openshift4 \
+  --graphics none \
+  --serial pty \
+  --console pty \
+  --boot hd \
+  --import
+```
+
+Connect to master-3 vm
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.100.252/24 ipv4.gateway 192.168.100.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+
+sudo dnf -y upgrade
+sudo dnf -y install git vim wget curl bash-completion tree tar libselinux-python3 firewalld ansible
+sudo reboot
+```
+
+Worker-1 VM
+```
+sudo virt-builder fedora-39  --format qcow2 \
+  --size 500G -o /var/lib/libvirt/images/worker-1.qcow2 \
+  --root-password password:Root@123
+
+sudo virt-install \
+  --name worker-1 \
+  --ram 131072 \
+  --vcpus 8 \
+  --disk path=/var/lib/libvirt/images/worker-1.qcow2 \
+  --os-variant rhel8.0 \
+  --network bridge=openshift4 \
+  --graphics none \
+  --serial pty \
+  --console pty \
+  --boot hd \
+  --import
+```
+
+Connect to worker-1 vm
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.100.251/24 ipv4.gateway 192.168.100.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+
+sudo dnf -y upgrade
+sudo dnf -y install git vim wget curl bash-completion tree tar libselinux-python3 firewalld ansible
+sudo reboot
+```
+
+Worker-2 VM
+```
+sudo virt-builder fedora-39  --format qcow2 \
+  --size 500G -o /var/lib/libvirt/images/worker-2.qcow2 \
+  --root-password password:Root@123
+
+sudo virt-install \
+  --name worker-2 \
+  --ram 131072 \
+  --vcpus 8 \
+  --disk path=/var/lib/libvirt/images/worker-2.qcow2 \
+  --os-variant rhel8.0 \
+  --network bridge=openshift4 \
+  --graphics none \
+  --serial pty \
+  --console pty \
+  --boot hd \
+  --import
+```
+
+Connect to worker-2 vm
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.100.250/24 ipv4.gateway 192.168.100.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+
+sudo dnf -y upgrade
+sudo dnf -y install git vim wget curl bash-completion tree tar libselinux-python3 firewalld ansible
+sudo reboot
+```
+
+Worker-3 VM
+```
+sudo virt-builder fedora-39  --format qcow2 \
+  --size 500G -o /var/lib/libvirt/images/worker-3.qcow2 \
+  --root-password password:Root@123
+
+sudo virt-install \
+  --name worker-3 \
+  --ram 131072 \
+  --vcpus 8 \
+  --disk path=/var/lib/libvirt/images/worker-3.qcow2 \
+  --os-variant rhel8.0 \
+  --network bridge=openshift4 \
+  --graphics none \
+  --serial pty \
+  --console pty \
+  --boot hd \
+  --import
+```
+
+Connect to worker-3 vm
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.100.249/24 ipv4.gateway 192.168.100.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+
+sudo dnf -y upgrade
+sudo dnf -y install git vim wget curl bash-completion tree tar libselinux-python3 firewalld ansible
+sudo reboot
+```
+
+
 ## Install Vagrant
 ```
 sudo yum install -y yum-utils
