@@ -23,6 +23,20 @@ sudo systemctl start virtproxyd-tls.socket
 sudo systemctl list-units --type=socket virt*
 ```
 
+```
+sudo dnf install qemu-kvm -y
+sudo dnf install libvirt libvirt-client -y
+sudo dnf install libguestfs-tools virt-top virt-install virt-manager libguestfs-tools-c guestfs-tools -y
+sudo systemctl enable --now libvirtd
+sudo systemctl status libvirtd
+virsh list --all
+sudo dnf install cockpit cockpit-machines
+sudo systemctl enable --now cockpit.socket
+sudo systemctl status cockpit.socket
+sudo firewall-cmd --add-service=cockpit --permanent
+sudo firewall-cmd --reload
+```
+
 ## Download Ubuntu 24.04 cloud image
 ```
 wget https://cloud-images.ubuntu.com/daily/server/noble/current/noble-server-cloudimg-amd64.img
