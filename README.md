@@ -78,7 +78,7 @@ sudo virt-builder fedora-39  --format qcow2 \
   --root-password password:Root@123
 
 sudo virt-install \
-  --name ocp-bastion-server \
+  --name master-1 \
   --ram 131072 \
   --vcpus 8 \
   --disk path=/var/lib/libvirt/images/ocp-bastion-server.qcow2 \
