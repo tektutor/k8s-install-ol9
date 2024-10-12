@@ -49,19 +49,41 @@ cd ~
 git clone https://github.com/kubernetes-sigs/kubespray.git
 ```
 
+## Let's create a network
+```
+<network>
+  <name>openshift4</name>
+  <forward mode='nat'>
+    <nat>
+      <port start='1024' end='65535'/>
+    </nat>
+  </forward>
+  <bridge name='openshift4' stp='on' delay='0'/>
+  <domain name='openshift4'/>
+  <ip address='192.168.100.1' netmask='255.255.255.0'>
+  </ip>
+</network>  
+```
+```
+sudo virsh net-define --file virt-net.xml
+sudo virsh net-autostart openshift4
+sudo virsh net-start openshift4
+sudo virsh net-list
+```
+
 ## Let's create a VM using KVM
 ```
-sudo virt-builder ubuntu-20.04  --format qcow2 \
-  --size 500G -o /var/lib/libvirt/images/master-1.qcow2 \
-  --root-password password:rps@123
+sudo virt-builder fedora-39  --format qcow2 \
+  --size 500G -o /var/lib/libvirt/images/ocp-bastion-server.qcow2 \
+  --root-password password:Root@123
 
 sudo virt-install \
   --name ocp-bastion-server \
   --ram 131072 \
   --vcpus 8 \
-  --disk path=/var/lib/libvirt/images/master-1.qcow2 \
-  --os-variant ubuntu20.04 \
-  --network bridge=default \
+  --disk path=/var/lib/libvirt/images/ocp-bastion-server.qcow2 \
+  --os-variant rhel8.0 \
+  --network bridge=openshift4 \
   --graphics none \
   --serial pty \
   --console pty \
