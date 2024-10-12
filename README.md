@@ -35,8 +35,8 @@ wget https://cloud-images.ubuntu.com/releases/24.04/release-20240423/ubuntu-24.0
 ```
 ```
 sudo virsh net-define --file virt-net.xml
-sudo virsh net-autostart default
-sudo virsh net-start default
+sudo virsh net-autostart k8s
+sudo virsh net-start k8s
 sudo virsh net-list
 ```
 
