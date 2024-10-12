@@ -74,7 +74,7 @@ sudo virsh net-list
 ## Let's create a VM using KVM
 ```
 sudo virt-builder fedora-39  --format qcow2 \
-  --size 500G -o /var/lib/libvirt/images/ocp-bastion-server.qcow2 \
+  --size 500G -o /var/lib/libvirt/images/master-1.qcow2 \
   --root-password password:Root@123
 
 sudo virt-install \
