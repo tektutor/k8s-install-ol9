@@ -56,6 +56,8 @@ EOF
 ```
 
 ```
+cloud-localds user-data.img user-data.txt
+
 qemu-img create -b ubuntu-24.04-server-cloudimg-amd64.img -F qcow2 -f qcow2 ubuntu-vm-disk.qcow2 500G
 
 virt-install --name master-1 \
