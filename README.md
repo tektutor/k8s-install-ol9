@@ -81,7 +81,7 @@ sudo virt-install \
   --name master-1 \
   --ram 131072 \
   --vcpus 8 \
-  --disk path=/var/lib/libvirt/images/ocp-bastion-server.qcow2 \
+  --disk path=/var/lib/libvirt/images/master-1.qcow2 \
   --os-variant rhel8.0 \
   --network bridge=openshift4 \
   --graphics none \
