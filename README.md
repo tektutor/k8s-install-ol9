@@ -60,11 +60,13 @@ cloud-localds user-data.img user-data.txt
 
 qemu-img create -b ubuntu-24.04-server-cloudimg-amd64.img -F qcow2 -f qcow2 ubuntu-vm-disk.qcow2 500G
 
-virt-install --name master-1 \
-  --virt-type kvm --memory 131072 --vcpus 8 \
-  --boot hd,menu=on \
-  --disk path=master-1.qcow2,device=disk \
-  --disk path=user-data.img,format=raw \
-  --graphics none \
-  --os-type Linux --os-variant ubuntu24.04
+sudo virt-install --name master-1 \
+--memory 131072 \
+--vcpus 8 \
+--disk /var/lib/libvirt/images/master-1.qcow2,device=disk,bus=virtio \
+--os-variant ubuntu24.04 \
+--virt-type kvm --graphics none \
+--network network=k8s,model=virtio \
+--noautoconsole \
+--import
 ```
