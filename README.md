@@ -47,7 +47,7 @@ wget https://cloud-images.ubuntu.com/releases/24.04/release-20240423/ubuntu-24.0
 
 ```
 qemu-img create -b ubuntu-24.04-server-cloudimg-amd64.img -F qcow2 -f qcow2 master-1.qcow2 500G
-
+qemu-img resize master-1.qcow2 500G
 mv master-1.qcow2 /var/lib/libvirt/images/master-1.qcow2
 
 virt-customize --add /var/lib/libvirt/images/master-1.qcow2 --root-password password:Root@123
