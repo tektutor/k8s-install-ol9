@@ -281,9 +281,7 @@ sudo reboot
 ```
 
 
-## Install Vagrant
+## Clone Kubespray
 ```
-sudo yum install -y yum-utils
-sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-sudo yum -y install vagrant
+git clone https://github.com/kubernetes-sigs/kubespray.git
 ```
