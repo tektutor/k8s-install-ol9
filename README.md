@@ -100,6 +100,11 @@ sudo virt-install --name master-2 \
 
 Test if the VM internet connectivity is working
 ```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.10.3/24 ipv4.gateway 192.168.10.1 \
+  ipv4.dns 8.8.8.8
+
 ping -c 2 8.8.8.8
 ping -c 2 google.com
 ```
@@ -127,6 +132,11 @@ sudo virt-install --name master-3 \
 
 Test if the VM internet connectivity is working
 ```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.10.4/24 ipv4.gateway 192.168.10.1 \
+  ipv4.dns 8.8.8.8
+
 ping -c 2 8.8.8.8
 ping -c 2 google.com
 ```
