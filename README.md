@@ -91,6 +91,21 @@ sudo virt-install \
   --import
 ```
 
+Connect to master-1 vm
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.100.254/24 ipv4.gateway 192.168.100.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+
+sudo dnf -y upgrade
+sudo dnf -y install git vim wget curl bash-completion tree tar libselinux-python3 firewalld ansible
+sudo reboot
+```
+
 ## Install Vagrant
 ```
 sudo yum install -y yum-utils
