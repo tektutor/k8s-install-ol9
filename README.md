@@ -53,7 +53,7 @@ mv master-1.qcow2 /var/lib/libvirt/images/master-1.qcow2
 
 virt-customize --add /var/lib/libvirt/images/master-1.qcow2 --root-password password:Root@123
 
-virt-customize /var/lib/libvirt/images/master-1.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
+virt-customize -a /var/lib/libvirt/images/master-1.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
 
 sudo virt-install --name master-1 \
 --memory 131072 \
@@ -85,7 +85,7 @@ mv master-2.qcow2 /var/lib/libvirt/images/master-2.qcow2
 
 virt-customize --add /var/lib/libvirt/images/master-2.qcow2 --root-password password:Root@123
 
-virt-customize /var/lib/libvirt/images/master-2.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
+virt-customize -a /var/lib/libvirt/images/master-2.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
 
 sudo virt-install --name master-2 \
 --memory 131072 \
@@ -112,7 +112,7 @@ mv master-3.qcow2 /var/lib/libvirt/images/master-3.qcow2
 
 virt-customize --add /var/lib/libvirt/images/master-3.qcow2 --root-password password:Root@123
 
-virt-customize /var/lib/libvirt/images/master-3.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
+virt-customize -a /var/lib/libvirt/images/master-3.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
 
 sudo virt-install --name master-3 \
 --memory 131072 \
