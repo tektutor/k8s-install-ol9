@@ -140,3 +140,99 @@ nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
 ping -c 2 8.8.8.8
 ping -c 2 google.com
 ```
+
+### Create worker-1 VM Live Image
+```
+qemu-img create -b ubuntu-24.04-server-cloudimg-amd64.img -F qcow2 -f qcow2 worker-1.qcow2 500G
+qemu-img resize worker-1.qcow2 500G
+mv worker-1.qcow2 /var/lib/libvirt/images/worker-1.qcow2
+
+virt-customize --add /var/lib/libvirt/images/worker-1.qcow2 --root-password password:Root@123
+
+virt-customize -a /var/lib/libvirt/images/worker-1.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
+
+sudo virt-install --name worker-1 \
+--memory 131072 \
+--vcpus 8 \
+--disk /var/lib/libvirt/images/worker-1.qcow2,device=disk,bus=virtio \
+--os-variant ubuntu24.04 \
+--virt-type kvm --graphics none \
+--network network=k8s,model=virtio \
+--noautoconsole \
+--import
+```
+
+Test if the VM internet connectivity is working
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.10.5/24 ipv4.gateway 192.168.10.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+```
+
+### Create worker-2 VM Live Image
+```
+qemu-img create -b ubuntu-24.04-server-cloudimg-amd64.img -F qcow2 -f qcow2 worker-2.qcow2 500G
+qemu-img resize worker-2.qcow2 500G
+mv worker-2.qcow2 /var/lib/libvirt/images/worker-2.qcow2
+
+virt-customize --add /var/lib/libvirt/images/worker-2.qcow2 --root-password password:Root@123
+
+virt-customize -a /var/lib/libvirt/images/worker-2.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
+
+sudo virt-install --name worker-2 \
+--memory 131072 \
+--vcpus 8 \
+--disk /var/lib/libvirt/images/worker-2.qcow2,device=disk,bus=virtio \
+--os-variant ubuntu24.04 \
+--virt-type kvm --graphics none \
+--network network=k8s,model=virtio \
+--noautoconsole \
+--import
+```
+
+Test if the VM internet connectivity is working
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.10.5/24 ipv4.gateway 192.168.10.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+```
+
+### Create worker-3 VM Live Image
+```
+qemu-img create -b ubuntu-24.04-server-cloudimg-amd64.img -F qcow2 -f qcow2 worker-3.qcow2 500G
+qemu-img resize worker-3.qcow2 500G
+mv worker-3.qcow2 /var/lib/libvirt/images/worker-3.qcow2
+
+virt-customize --add /var/lib/libvirt/images/worker-3.qcow2 --root-password password:Root@123
+
+virt-customize -a /var/lib/libvirt/images/worker-3.qcow2 --install net-tools,network-manager,vim,git,iputils-ping
+
+sudo virt-install --name worker-3 \
+--memory 131072 \
+--vcpus 8 \
+--disk /var/lib/libvirt/images/worker-3.qcow2,device=disk,bus=virtio \
+--os-variant ubuntu24.04 \
+--virt-type kvm --graphics none \
+--network network=k8s,model=virtio \
+--noautoconsole \
+--import
+```
+
+Test if the VM internet connectivity is working
+```
+nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
+  connection.autoconnect yes ipv4.method manual \
+  ipv4.address 192.168.10.5/24 ipv4.gateway 192.168.10.1 \
+  ipv4.dns 8.8.8.8
+
+ping -c 2 8.8.8.8
+ping -c 2 google.com
+```
