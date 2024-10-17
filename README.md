@@ -1,3 +1,14 @@
+```
+  config.vm.define 'pxe', autostart: false do |test|
+	test.vm.provider 'virtualbox' do |vb|
+	  vb.customize ['modifyvm',:id, '--boot1', 'net', '--boot2', 'disk'] # I want to network boot
+	  vb.customize ['modifyvm',:id, '--nic1', 'intnet', '--nic2', 'nat'] # swap the networks around
+	  vb.customize ['modifyvm', :id, '--natpf2', "ssh,tcp,127.0.0.1,52222,,22" ] #port forward
+	end
+	test.vm.network "forwarded_port", id: 'ssh', guest: 22, host_ip: '127.0.0.1', host: 52222, auto_correct: false, adapter: 1
+  end
+```
+
 ## Install KVM in Oracle Linux v9.4
 ```
 sudo dnf install qemu-kvm -y
@@ -195,7 +206,14 @@ sudo virt-install --name worker-2 \
 ```
 
 Test if the VM internet connectivity is working
-```
+```  config.vm.define 'pxe', autostart: false do |test|
+	test.vm.provider 'virtualbox' do |vb|
+	  vb.customize ['modifyvm',:id, '--boot1', 'net', '--boot2', 'disk'] # I want to network boot
+	  vb.customize ['modifyvm',:id, '--nic1', 'intnet', '--nic2', 'nat'] # swap the networks around
+	  vb.customize ['modifyvm', :id, '--natpf2', "ssh,tcp,127.0.0.1,52222,,22" ] #port forward
+	end
+	test.vm.network "forwarded_port", id: 'ssh', guest: 22, host_ip: '127.0.0.1', host: 52222, auto_correct: false, adapter: 1
+  end
 nmcli con add type ethernet con-name enp1s0 ifname enp1s0 \
   connection.autoconnect yes ipv4.method manual \
   ipv4.address 192.168.10.6/24 ipv4.gateway 192.168.10.1 \
